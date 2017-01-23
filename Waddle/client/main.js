@@ -3,20 +3,24 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+Template.navbar.onCreated(function navbarOnCreated() {
+  this.userType = new ReactiveVar("navAnon");
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
+Template.navbar.helpers({
+  nav: function() {
+    return Template.instance().userType.get();
   },
 });
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
+Template.navbar.events({
+  'click .studentTest'(event, instance) {
+    instance.userType.set("navStudent");
+  },
+  'click .lecturerTest'(event, instance) {
+    instance.userType.set("navLecturer");
+  },
+  'click .anonTest'(event, instance) {
+    instance.userType.set("navAnon");
   },
 });
