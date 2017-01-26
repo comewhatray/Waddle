@@ -1,1 +1,27 @@
-/* CSS declarations go here */
+html, body {
+    height: 100%;
+    width: 100%;
+}
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.container-table {
+    display: table;
+    height: 80%;
+}
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+.glyphicon {
+    font-size: 16px;
+}
+.search-results {
+    background-color: #eee;
+    border-width: 1px;
+    border-style: solid;
+    height: 50%;
+    font-size: 14px;
+    margin-top: 10%;
+}
