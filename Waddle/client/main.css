@@ -25,3 +25,9 @@ html, body {
     font-size: 14px;
     margin-top: 10%;
 }
+
+/*navbar*/
+.navbar-default {
+	background-color: #4B0082;
+	border-color: #34DDDD;
+}
