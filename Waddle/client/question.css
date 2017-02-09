@@ -1,0 +1,26 @@
+.updoot {
+text-align: center;
+background-color:#EEE;
+padding-left: 0px;
+padding-right: 0px;
+}
+
+.old-question {
+display: inline;
+background-color:#DFF;
+}
+
+.time-ago {
+text-align: center;
+font-size: 8px;
+}
+
+.ansHead {
+font-weight: Bold;
+margin-left: -40px;
+}
+
+.ansBody {
+background-color: #FDF;
+margin-bottom: 20px;
+}

@@ -1,0 +1,16 @@
+.fixed-sidebar {
+position : fixed;
+right : 0px;
+}
+
+.fixed-dropdown {
+position : fixed;
+right: -5px;
+top: 200px;
+}
+
+#fixed-modules {
+position : fixed;
+right: 0px;
+top: 232px;
+}
