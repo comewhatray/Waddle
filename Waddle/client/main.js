@@ -24,3 +24,5 @@ Template.navbar.events({
     instance.userType.set("navAnon");
   },
 });
+
+

@@ -19,3 +19,9 @@ Router.route('/questionBoard', function () {
 }, {
   name: 'questionBoard'
 });
+
+Router.route('/lecturerCarousel', function () {
+  this.render('lecturerCarousel');
+}, {
+  name: 'lecturerCarousel'
+});

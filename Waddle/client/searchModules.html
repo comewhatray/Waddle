@@ -14,7 +14,14 @@
   <div class="row">
     <div class="col-sm-2 col-md-3"></div>
     <div class="col-sm-8 col-md-6">
-      <div class="pre-scrollable search-results">
+      <div class="results-module-wrapper">{{> searchResults}}</div>
+    </div>
+    <div class="col-sm-2 col-md-3"></div>
+  </div>
+</template>
+
+<template name="searchResults">
+<div class="pre-scrollable search-results">
         <ul class="list-group">
           <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA101 - bibendum mattis natoque egestas scelerisque</a></li>
           <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA102 - dolor eu eleifend erat arcu</a></li>
@@ -41,7 +48,4 @@
           <!--TODO: pipe data from these links into question board to fetch the right questions and relateds -->
         </ul>
       </div>
-    </div>
-    <div class="col-sm-2 col-md-3"></div>
-  </div>
 </template>

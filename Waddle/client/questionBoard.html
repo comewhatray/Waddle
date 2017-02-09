@@ -1,18 +1,21 @@
 <template name="questionBoard">
 	<div class="row">
-		<div class="col-sm-8">
-			<div class="question-box">
-				<form>
-				<div class="form-group">
-    			<textarea class="form-control" rows="3"></textarea>
-  			</div>
-				<button type="submit" class="btn btn-primary">Axem</button>
-				</form>
+		<div class="col-sm-8 col-xs-12">
+			{{> questionBox}}
+			{{> question}}
+			{{> question}}
+			{{> question}}
+			{{> question}}
+			<div class="dropdown visible-xs">
+				<button class="btn btn-default dropdown-toggle fixed-dropdown" type="button" id="menu1" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-left"></span></button>
+				<ul class="dropdown-menu dropdown-menu-right" id="fixed-modules" role="menu" aria-labelledby="menu1">
+					<li role="presentation">{{> searchResults}}</li>
+				</ul>
 			</div>
-			
 		</div>
-		<div class="col-sm-4 hidden-xs">
-			
+		<div class="col-sm-4 hidden-xs fixed-sidebar">
+			<h3>Related Modules</h3>
+			{{> searchResults}}
 		</div>
 	</div>
 </template>

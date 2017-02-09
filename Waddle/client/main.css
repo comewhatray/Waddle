@@ -2,6 +2,9 @@ html, body {
     height: 100%;
     width: 100%;
 }
+body {
+    padding-top: 70px;
+}
 .row {
     margin-left: 0px;
     margin-right: 0px;
@@ -18,10 +21,12 @@ html, body {
     font-size: 16px;
 }
 .search-results {
-    background-color: #eee;
+    height: 90%;
+    font-size: 14px;
+}
+
+.results-module-wrapper {
     border-width: 1px;
     border-style: solid;
-    height: 50%;
-    font-size: 14px;
     margin-top: 10%;
 }
