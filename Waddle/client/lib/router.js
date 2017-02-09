@@ -19,3 +19,9 @@ Router.route('/questionBoard', function () {
 }, {
   name: 'questionBoard'
 });
+
+Router.route('/settings', function () {
+  this.render('settings');
+}, {
+	name: 'settings'
+});
