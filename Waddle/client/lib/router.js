@@ -25,3 +25,8 @@ Router.route('/lecturerCarousel', function () {
 }, {
   name: 'lecturerCarousel'
 });
+Router.route('/settings', function () {
+  this.render('settings');
+}, {
+	name: 'settings'
+});
