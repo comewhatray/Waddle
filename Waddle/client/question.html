@@ -1,0 +1,37 @@
+<template name="question">
+	<div class="row">
+		<div class="col-xs-2 col-sm-1 updoot">
+			<div><span class="glyphicon glyphicon-chevron-up"></span></div>
+			<div>100</div>
+			<div><span class="glyphicon glyphicon-chevron-down"></span></div>
+			<div class="time-ago">3h</div>
+		</div>
+			<div class="old-question col-xs-10 col-sm-11">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales sapien vitae vehicula malesuada. Donec eu velit molestie, pellentesque eros vitae, condimentum justo. Praesent eu est tempus, lacinia sem at, maximus lorem. Sed quam dolor, imperdiet rhoncus consectetur ac, ullamcorper quis purus. Etiam risus ex, maximus vel consequat ac, vestibulum nec eros. Nullam pharetra, mi ac posuere consectetur, nunc turpis dictum ipsum, vitae porttitor enim turpis a tellus. Pellentesque in tellus consectetur, congue ante nec, vulputate velit.
+			</div>
+	</div>
+	{{> answer}}
+</template>
+
+<template name="answer">
+	<div class="row">
+		<div class="col-xs-2 col-sm-1"></div>
+		<div class="col-xs-10 col-sm-11">
+			<div class="ansHead">Lorem McIpsum Answers: </div>
+			<div class="ansBody">
+				Quisque suscipit enim at congue tempus. Sed nulla nunc, vulputate at porttitor eu, malesuada vel est. In elementum condimentum massa quis dapibus. Pellentesque sit amet ipsum ultricies dui elementum accumsan non sit amet nisl. Mauris dignissim semper arcu congue ultrices. Sed mattis interdum nulla, in semper nibh molestie et. Sed ac mi mi. Nam in dapibus nulla, non vestibulum urna. Phasellus at purus mauris. In feugiat commodo dolor, in cursus magna laoreet quis. In facilisis quam at dolor lacinia semper.
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="questionBox">
+	<div class="question-box">
+		<form>
+			<div class="form-group">
+    			<textarea class="form-control" rows="3"></textarea>
+  			</div>
+			<button type="submit" class="btn btn-primary">Axem</button>
+		</form>
+	</div>
+</template>
