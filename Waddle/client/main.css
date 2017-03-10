@@ -21,12 +21,14 @@ body {
     font-size: 16px;
 }
 .search-results {
-    height: 90%;
     font-size: 14px;
+    overflow-y: scroll;
+    height: 100%;
 }
 
 .results-module-wrapper {
     border-width: 1px;
     border-style: solid;
     margin-top: 10%;
+    height: 60vh;
 }

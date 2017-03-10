@@ -11,12 +11,35 @@
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="pwd">
         </div>
-        <div class="checkbox">
-            <label><input type="checkbox"> Remember me</label>
-        </div>
-        <button type="submit" id="submit" class="btn btn-default">Submit</button>
+
+	{{#if showNewAcc}}
+    		{{> newAcc}}
+	{{else}}
+		<div class="checkbox">
+			<label><input type="checkbox"> Remember me</label>
+        	</div>
+	{{/if}}
+	<button type="submit" id="submit" class="btn btn-default">
+	{{#if showNewAcc}}
+    		<span class="glyphicon glyphicon-arrow-left"></span>
+	{{else}}
+		Login
+	{{/if}}
+	</button>
+        <button type="create" id="create" class="btn btn-default">Create account</button>
     </form>
     <div class="col-sm-4"></div>
   </div>
 </div>
+</template>
+
+<template name="newAcc">
+        <div class="form-group">
+            <label for="email">Confirm Email:</label>
+            <input type="email" class="form-control confirm" id="emailConf">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Confirm Password:</label>
+            <input type="password" class="form-control confirm" id="pwdConf">
+        </div>
 </template>

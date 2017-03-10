@@ -1,16 +1,22 @@
 .fixed-sidebar {
 position : fixed;
 right : 0px;
+height : 100vh;
+padding-bottom: 127px;
 }
 
 .fixed-dropdown {
 position : fixed;
 right: -5px;
-top: 200px;
+top: 166px;
 }
 
 #fixed-modules {
 position : fixed;
 right: 0px;
-top: 232px;
+top: 199px;
+}
+
+.mobile-modules {
+height: calc(100vh - 220px);
 }
