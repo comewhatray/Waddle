@@ -33,7 +33,15 @@
       <a class="navbar-brand" href="/">Axem</a>
     </div>
 
-    {{> Template.dynamic template=nav}}
+{{#if loggedIn}}
+	{{#if isLecturer}}
+		{{> navLecturer}}
+	{{else}}
+		{{> navStudent}}
+	{{/if}}
+{{else}}
+	{{>navAnon}}
+{{/if}}
 
   </div>
 

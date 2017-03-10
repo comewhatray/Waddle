@@ -1,6 +1,24 @@
 .lecturer-carousel {
-height: 85%;
+height: 100%;
+overflow-y: scroll;
+background-color:#ddd;
+margin-top: -20px; /*We might want to improve on this crude way of lining the carousel up with the navbar*/
 }
+
+.lc-inner {
+height: 100%;
+overflow-y: scroll;
+background-color:#ddd;
+}
+
 .lc-subject {
 text-align: center
+}
+
+.carousel-indicators li {
+    background: #ccc;
+}
+
+.carousel-indicators .active {
+    background: #666;
 }
