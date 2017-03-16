@@ -3,7 +3,7 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Choose a course or lecturer.">
+      <input type="text" class="form-control" id="lectureSearch" placeholder="Choose a course or lecturer.">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
       </span>
@@ -22,30 +22,10 @@
 
 <template name="searchResults">
 <div class="search-results">
-        <ul class="list-group">
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA101 - bibendum mattis natoque egestas scelerisque</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA102 - dolor eu eleifend erat arcu</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA103 - nunc est pede lectus parturient</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA104 - suscipit arcu nunc libero condimentum</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA105 - hendrerit faucibus amet non elementum</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA106 - feugiat fusce est vehicula auctor</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA107 - sed luctus sollicitudin nisl vestibulum</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA108 - placerat arcu gravida eu maecenas</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA109 - ullamcorper enim ac nec lorem</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA110 - tortor id ultricies lacus convallis</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA111 - orci quam turpis nunc consequat</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA112 - ante nullam sapien ultrices tellus</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA113 - vitae feugiat mauris eget pede</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA114 - ipsum etiam dolor libero eros</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA115 - adipiscing ut eu tincidunt proin</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA116 - et eleifend tellus porttitor vel</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA117 - quia proin eget consequat nibh</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA118 - in tempor pellentesque congue diam</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA119 - a ligula doloribus dolor mauris </a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA120 - facilisis nulla nonummy senectus ipsum</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA121 - nibh convallis lacinia nullam eget</a></li>
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">AA122 - convallis tristique nam metus ultricies</a></li>
-          <!--TODO: pipe data from these links into question board to fetch the right questions and relateds -->
+        <ul class="list-group outcome">
+	  {{#each modules}}
+          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}">{{name}} - {{desc}}</a></li>
+	  {{/each}}
         </ul>
       </div>
 </template>
