@@ -29,6 +29,15 @@ body {
 .results-module-wrapper {
     border-width: 1px;
     border-style: solid;
+    border-color: #ddd;
     margin-top: 10%;
     height: 60vh;
+}
+
+.outcome {
+    margin-bottom: 0px;
+}
+
+.question-box {
+    margin-bottom: 20px;
 }

@@ -8,7 +8,8 @@
     "babel-runtime": "^6.22.0",
     "bcrypt": "^1.0.2",
     "force-ssl": "^1.0.5",
-    "meteor-node-stubs": "~0.2.0",
-    "sessions": "0.0.2-7"
+    "meteor-node-stubs": "^0.2.5",
+    "sessions": "0.0.2-7",
+    "simpl-schema": "^0.2.3"
   }
 }
