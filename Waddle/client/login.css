@@ -1,0 +1,20 @@
+#create {
+display:inline;
+float:right;
+}
+
+#submit {
+display:inline;
+}
+
+.confirm {
+	background-color: #fcc;
+}
+
+.valid {
+	background-color: #cfc;
+}
+
+.confirm .valid {
+	background-color: #ccc;
+}
