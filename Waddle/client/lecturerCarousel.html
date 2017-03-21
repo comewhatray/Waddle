@@ -2,85 +2,31 @@
 <div id="Lecturer" class="carousel slide lecturer-carousel" data-ride="carousel" data-interval="false">
   <!-- Indicators -->
   <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
-    <li data-target="#myCarousel" data-slide-to="3"></li>
+    {{#each modules}}
+    <li data-target="#myCarousel" data-slide-to="{{@index}}" class={{#if first @index}}active{{/if}}  ></li>
+    {{/each}}
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner lc-inner" role="listbox">
-    <div class="item active">
+    {{#each modules}}
+    <div class="item  {{#if first @index}}active{{/if}}">
 	<div class="row">
 		<div class="col-xs-2"></div>
 		<div class="col-xs-8">
      			<div class="lc-subject">
-				AA101 - bibendum mattis natoque egestas scelerisque
+				{{name}} - {{desc}}
       			</div>
+			{{#each questions}}
+			{{#if needsAnswering answeredBy}}
 			{{> question}}
-			{{> question}}
-			{{> question}}
-			{{> question}}
-			{{> question}}
-			{{> question}}
+			{{/if}}
+	  		{{/each}}
 		</div>
 		<div class="col-xs-2"></div>
 	</div>
     </div>
-
-    <div class="item">
-	<div class="row">
-		<div class="col-xs-2"></div>
-		<div class="col-xs-8">
-     			<div class="lc-subject">
-				AA102 - dolor eu eleifend erat arcu
-      			</div>
-			{{> question}}
-			{{> question}}
-			{{> question}}
-			{{> question}}
-			{{> question}}
-			{{> question}}
-		</div>
-		<div class="col-xs-2"></div>
-	</div>
-    </div>
-
-    <div class="item">
-	<div class="row">
-		<div class="col-xs-2"></div>
-		<div class="col-xs-8">
-     			<div class="lc-subject">
-				AA103 - nunc est pede lectus parturient
-      			</div>
-			{{> question}}
-			{{> question}}
-			{{> question}}
-			{{> question}}
-			{{> question}}
-			{{> question}}
-		</div>
-		<div class="col-xs-2"></div>
-	</div>
-    </div>
-
-    <div class="item">
-	<div class="row">
-		<div class="col-xs-2"></div>
-		<div class="col-xs-8">
-     			<div class="lc-subject">
-				AA104 - suscipit arcu nunc libero condimentum
-      			</div>
-			{{> question}}
-			{{> question}}
-			{{> question}}
-			{{> question}}
-			{{> question}}
-			{{> question}}
-		</div>
-		<div class="col-xs-2"></div>
-	</div>
-    </div>
+    {{/each}}
 </div>
 
   <!-- Left and right controls -->
