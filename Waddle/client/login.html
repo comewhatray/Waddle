@@ -51,9 +51,16 @@
         </div>
 
         <div class="form-group">
-            <label for="cource_choice">Please Select Your Course:</label>
-            <input type="password" class="form-control" id="pwdConf">
+          <label for="sel1">Select Course:</label>
+          <select class="form-control" id="sel1">
+
+            {{#each courses}}
+            <option cID={{courseID}}>{{name}}</option>
+            {{/each}}
+          </select>
         </div>
+
+      
 
         <!--{{> searchResults}}-->
 </template>

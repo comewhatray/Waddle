@@ -1,14 +1,23 @@
+//
 import { Template } from 'meteor/templating';
+
+//gives javascript variable things -- 
 import { ReactiveVar } from 'meteor/reactive-var';
 
+// sets up variables for when needed
 Template.login.onCreated(function loginOnCreated() {
 	this.showNewAcc = new ReactiveVar(false);
 	this.emailsEqual = new ReactiveVar(false);
 	this.passwordsEqual = new ReactiveVar(false);
+	this.courseChoice = new ReactiveVar(0);
 });
 
+//links to html page
 import './login.html';
 
+Meteor.subscribe('courses', {onReady: function(){
+
+}});
 
 Template.login.helpers({
 	showNewAcc() {
@@ -16,6 +25,12 @@ Template.login.helpers({
 			return true;
 		}
 	return false;
+	}
+});
+
+Template.newAcc.helpers({
+	courses() {
+		return Courses.find();
 	}
 });
 
@@ -29,11 +44,19 @@ Template.login.events({
 			var userEmail = t.find('#email').value,
 			password  = t.find('#pwd').value;
 			Meteor.loginWithPassword(userEmail, password);
+			//call backthing
 			Router.go('/');
 		}
 	},
+'click .courseCode' : function (e,t)
+	{
+		courseChoice = e.target.cID;
+	},
+
+
 'click #create' : function (e,t)
 	{
+		//prevent default -- e has its own code it will execute by default which we want to stop
 		e.preventDefault();
 		if(t.showNewAcc.get()){
 			var userEmail = t.find('#email').value,
@@ -42,12 +65,14 @@ Template.login.events({
 				email:    userEmail,
 				password: password,
 				profile: {
+					// put things here
+					cID: courseChoice,
 				}
 			}, function (error) {
 				if (error) {
 					console.log("Cannot create user");
 				}
-			})
+			});
 			Router.go('/');
 		}else{
 			t.showNewAcc.set(true);
@@ -55,7 +80,7 @@ Template.login.events({
 	},
 'input #emailConf' : function(e,t)
 	{
-		if((t.find("#emailConf").value==t.find("#email")) != emailsEqual && t.find("#emailConf").length>0){
+		if((t.find("#emailConf").value==t.find("#email").value) != emailsEqual && t.find("#emailConf").length>0){
 			Session.set('emailsEqual', !(Session.get('emailsEqual')));
 			$(e.target).toggleClass('valid');
 		}
