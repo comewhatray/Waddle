@@ -13,3 +13,10 @@ Template.question.helpers({
     return ansBy != 0;
   },
 });
+
+Template.questionBox.events({
+  'click #axe'(event, instance) {
+    e.preventDefault();
+
+  },
+});

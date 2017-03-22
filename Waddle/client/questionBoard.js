@@ -2,15 +2,16 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 import './questionBoard.html';
+var sesh, sub;
 
-Template.questionBoard.onCreated(function questionBoardOnCreated() {
-
-});
-
-Meteor.subscribe('questions', {onReady: function(){
-	console.log("q count: "+ Questions.find().count());
+Tracker.autorun(function(){
+	var sesh = Session.get('currModule');
+	if(sub) sub.stop();
+	sub = Meteor.subscribe('questions', sesh, {onReady: function(){
+		console.log("q count: "+ Questions.find().count());
 	}}
-);
+	);
+});
 
 Template.questionBoard.helpers({
   questions() {
@@ -18,6 +19,9 @@ Template.questionBoard.helpers({
   },
   isAnswered(ansBy) {
     return ansBy != 0;
+  },
+  loggedIn() {
+    return !!Meteor.user();
   },
 });
 

@@ -3,8 +3,14 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
+Meteor.startup(function () {
+	Session.set('currModule', 0);
+	Session.set('currQuestion', 0);
+	Session.set('isLecturer', false);
+});
+
 Template.navbar.onCreated(function navbarOnCreated() {
-  Session.set('isLecturer', false);
+  
 });
 
 Template.navbar.helpers({
