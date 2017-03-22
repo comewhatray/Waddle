@@ -1,8 +1,11 @@
+<!-- Login in screen tepmlate-->
+
 <template name="login">
 <div class="container container-table">
   <div class="row vertical-center-row">
-    <div class="col-sm-4"></div>
+    <div class="col-sm-4"> <!-- the left side--></div>
     <form class="login-form col-sm-4">
+        <!-- center of screen-->
         <div class="form-group">
             <label for="email">Email address:</label>
             <input type="email" class="form-control" id="email">
@@ -12,6 +15,9 @@
             <input type="password" class="form-control" id="pwd">
         </div>
 
+    <!--  Logic to determin if it is a new account and such-->
+
+    <!-- this uses data from the login.js-->
 	{{#if showNewAcc}}
     		{{> newAcc}}
 	{{else}}
@@ -28,11 +34,12 @@
 	</button>
         <button type="create" id="create" class="btn btn-default">Create account</button>
     </form>
-    <div class="col-sm-4"></div>
+    <div class="col-sm-4"> <!-- right of screen--></div>
   </div>
 </div>
 </template>
 
+<!-- the template used when there is a new account created-->
 <template name="newAcc">
         <div class="form-group">
             <label for="email">Confirm Email:</label>
@@ -42,4 +49,11 @@
             <label for="pwd">Confirm Password:</label>
             <input type="password" class="form-control confirm" id="pwdConf">
         </div>
+
+        <div class="form-group">
+            <label for="cource_choice">Please Select Your Course:</label>
+            <input type="password" class="form-control" id="pwdConf">
+        </div>
+
+        <!--{{> searchResults}}-->
 </template>
