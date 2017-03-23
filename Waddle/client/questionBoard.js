@@ -8,7 +8,6 @@ Tracker.autorun(function(){
 	var sesh = Session.get('currModule');
 	if(sub) sub.stop();
 	sub = Meteor.subscribe('questions', sesh, {onReady: function(){
-		console.log("q count: "+ Questions.find().count());
 	}}
 	);
 });
@@ -23,8 +22,4 @@ Template.questionBoard.helpers({
   loggedIn() {
     return !!Meteor.user();
   },
-});
-
-Template.questionBoard.events({
-
 });

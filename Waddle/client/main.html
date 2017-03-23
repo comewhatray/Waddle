@@ -24,6 +24,12 @@
     <script src="js/bootstrap.min.js"></script>
   </body>
 
+<template name="unverifiedBar">
+	<div class="alert alert-warning" role="alert" style="text-align: center">
+  	<strong>Your account is unverified.</strong> Please check your email for a verification link or <a id="verify" href="#">click here</a> to send another email.
+	</div>
+</template>
+
 <template name="navbar">
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
@@ -50,6 +56,9 @@
   </div>
 
 </nav>
+{{#if unverified}}
+{{> unverifiedBar}}
+{{/if}}
 </template>
 
 <template name="Layout">

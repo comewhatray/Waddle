@@ -20,6 +20,9 @@ Template.navbar.helpers({
 	isLecturer() {
 		return Session.get('isLecturer');
 	},
+	unverified() {
+		return !!Meteor.user() && !Meteor.user().emails[0].verified;
+	}
 });
 
 Template.navbar.events({
@@ -35,4 +38,8 @@ Template.navbar.events({
 
 });
 
-
+Template.unverifiedBar.events({
+	'click #verify'(event, instance) {
+		Meteor.call( 'sendVerificationLink');
+	}
+});

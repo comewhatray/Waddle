@@ -19,7 +19,7 @@
 	<div class="row">
 		<div class="col-xs-2 col-sm-1"></div>
 		<div class="col-xs-10 col-sm-11">
-			<div class="ansHead">Lorem McIpsum Answers: </div>
+			<div class="ansHead">{{getName answeredBy}} Answers: </div>
 			<div class="ansBody panel panel-default">
 			{{answerText}}
 			</div>
@@ -31,7 +31,7 @@
 	<div class="question-box">
 		<form>
 			<div class="form-group">
-    			<textarea class="form-control" rows="3"></textarea>
+    			<textarea class="form-control" rows="3" id="postField"></textarea>
   			</div>
 			<button type="submit" class="btn btn-primary" id="axe">Axem</button>
 		</form>
