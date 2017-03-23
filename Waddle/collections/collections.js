@@ -1,5 +1,6 @@
 import SimpleSchema from 'simpl-schema';
 Modules = new Mongo.Collection('modules');
+Courses = new Mongo.Collection('courses');
 Questions = new Mongo.Collection('questions');
 
 Modules.schema = new SimpleSchema({
@@ -11,8 +12,7 @@ Modules.schema = new SimpleSchema({
 Questions.schema = new SimpleSchema({
   questionID: {type: Number},
   text: {type: String},
-  desc: {type: String},
-  askedBY: {type: Number},
+  askedBy: {type: Number},
   module: {type: Number},
   answeredBy: {type: Number},
   answerText: {type: String},

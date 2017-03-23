@@ -9,6 +9,10 @@ Template.login.onCreated(function loginOnCreated() {
 
 import './login.html';
 
+Meteor.subscribe('courses', {onReady: function(){
+	}}
+);
+
 
 Template.login.helpers({
 	showNewAcc() {
@@ -45,26 +49,28 @@ Template.login.events({
 				}
 			}, function (error) {
 				if (error) {
-					console.log("Cannot create user");
+					console.log("Cannot create user: "+ error.reason);
+				}else{
+					Router.go('/');
+					Meteor.call( 'sendVerificationLink');
 				}
 			})
-			Router.go('/');
 		}else{
 			t.showNewAcc.set(true);
 		}
 	},
 'input #emailConf' : function(e,t)
 	{
-		if((t.find("#emailConf").value==t.find("#email")) != emailsEqual && t.find("#emailConf").length>0){
-			Session.set('emailsEqual', !(Session.get('emailsEqual')));
+		if(((e.target.value == t.find("#email").value) != t.emailsEqual.curValue) && e.target.value.length>0){
+			t.emailsEqual.curValue = !t.emailsEqual.curValue;
 			$(e.target).toggleClass('valid');
 		}
 	},
 
 'input #pwdConf' : function(e,t)
 	{
-		if((e.target.value == $('#pwd')[0].value) != Session.get('passwordsEqual') && e.target.value.length>0){
-			Session.set('passwordsEqual', !(Session.get('passwordsEqual')));
+		if(((e.target.value == t.find("#pwd").value) != t.passwordsEqual.curValue) && e.target.value.length>0){
+			t.passwordsEqual.curValue = !t.passwordsEqual.curValue;
 			$(e.target).toggleClass('valid');
 		}
 	}
