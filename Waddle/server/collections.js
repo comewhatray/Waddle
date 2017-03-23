@@ -12,6 +12,6 @@ Meteor.publish('questions', function(mod){
 	return Questions.find({module:mod});
 });
 
-Meteor.publish('courses', function(){
-	return Courses.find();
+Meteor.publish('lecturerNames', function(){
+	return Meteor.users.find({ "profile.userId":{$lt:0}});
 });

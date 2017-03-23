@@ -72,7 +72,7 @@ Template.login.events({
 				if (error) {
 					console.log("Cannot create user: "+ error.reason);
 				}else{
-					Router.go('/');
+					//Router.go('/');
 					Meteor.call( 'sendVerificationLink');
 				}
 			});
