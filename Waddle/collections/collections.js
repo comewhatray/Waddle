@@ -2,6 +2,7 @@ import SimpleSchema from 'simpl-schema';
 Modules = new Mongo.Collection('modules');
 Courses = new Mongo.Collection('courses');
 Questions = new Mongo.Collection('questions');
+Courses = new Mongo.Collection('courses');
 
 Modules.schema = new SimpleSchema({
   moduleID: {type: Number},
