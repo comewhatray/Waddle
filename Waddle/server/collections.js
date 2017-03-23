@@ -11,7 +11,3 @@ Meteor.publish('courses', function(){
 Meteor.publish('questions', function(mod){
 	return Questions.find({module:mod});
 });
-
-Meteor.publish('courses', function(){
-	return Courses.find();
-});
