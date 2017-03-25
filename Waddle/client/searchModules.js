@@ -12,7 +12,7 @@ Meteor.subscribe('modules', {onReady: function(){
 
 Template.searchResults.helpers({
   modules() {
-    return Modules.find();
+    return Modules.find({courses:Session.get('currCourse')});
   },
 });
 

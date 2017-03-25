@@ -11,14 +11,14 @@ Tracker.autorun(function(){
 	qSub = Meteor.subscribe('questions', sesh, {onReady: function(){}});
 });
 
+Template.questionBoard.onRendered(function(){
+});
+
 Template.questionBoard.helpers({
   questions() {
     return Questions.find();
   },
   isAnswered(ansBy) {
     return ansBy != 0;
-  },
-  loggedInStudent() {
-    return !!Meteor.userId() && Meteor.user().profile.userId>0;
   },
 });

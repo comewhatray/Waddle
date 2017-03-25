@@ -4,12 +4,14 @@ import { Template } from 'meteor/templating';
 //gives javascript variable things -- 
 import { ReactiveVar } from 'meteor/reactive-var';
 
+var courseChoice;
+
 // sets up variables for when needed
 Template.login.onCreated(function loginOnCreated() {
 	this.showNewAcc = new ReactiveVar(false);
 	this.emailsEqual = new ReactiveVar(false);
 	this.passwordsEqual = new ReactiveVar(false);
-	var courseChoice = 0;
+	courseChoice = 0;
 });
 
 //links to html page

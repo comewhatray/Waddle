@@ -2,10 +2,17 @@ Router.configure({
     layoutTemplate: 'Layout'
 });
 
-Router.route('/', {
-    template: 'searchModules'
+Router.route('/', function () {
+  user = Meteor.user();
+  if(!user){
+    this.render('searchModules');	//this will need to be updated
+  }else if(user.profile.userId>0){
+    this.render('searchModules');
+  }else{
+    this.render('lecturerCarousel');
+  }
 }, {
-  name: 'searchModules'
+  name: 'root'
 });
 
 Router.route('/login', function () {
@@ -18,12 +25,6 @@ Router.route('/questionBoard', function () {
   this.render('questionBoard');
 }, {
   name: 'questionBoard'
-});
-
-Router.route('/lecturerCarousel', function () {
-  this.render('lecturerCarousel');
-}, {
-  name: 'lecturerCarousel'
 });
 
 Router.route('/settings', function () {
