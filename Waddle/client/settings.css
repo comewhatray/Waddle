@@ -1,0 +1,12 @@
+.change-pw {
+	padding:10px;
+}
+
+#save {
+display:inline;
+float:right;
+}
+
+#cancel {
+display:inline;
+}
