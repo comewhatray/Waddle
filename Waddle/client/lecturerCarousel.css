@@ -1,18 +1,20 @@
 .lecturer-carousel {
-height: 100%;
-overflow-y: scroll;
-background-color:#ddd;
+height: 60vh;
 margin-top: -20px; /*We might want to improve on this crude way of lining the carousel up with the navbar*/
 }
 
 .lc-inner {
 height: 100%;
 overflow-y: scroll;
-background-color:#ddd;
 }
 
 .lc-subject {
 text-align: center
+}
+
+.carousel-indicators {
+    bottom:0px;
+    margin-bottom:0px;
 }
 
 .carousel-indicators li {
@@ -21,4 +23,26 @@ text-align: center
 
 .carousel-indicators .active {
     background: #666;
+}
+
+.carousel-control.left, .carousel-control.right {
+  background: #fff;
+  background: -webkit-radial-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0), rgba(0,0,0,0));
+  background: -o-radial-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0), rgba(0,0,0,0));
+  background: -moz-radial-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0), rgba(0,0,0,0));
+  background: radial-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0), rgba(0,0,0,0));
+}
+
+.answer-box-wrapper {
+  height:calc(40% - 25px);
+}
+
+textarea.ansText{
+  width: 100%;
+  height: calc(100% - 40px);
+  resize: none;
+}
+
+#ans {
+  width:100%;
 }

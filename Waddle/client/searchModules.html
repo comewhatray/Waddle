@@ -24,7 +24,7 @@
 <div class="search-results">
         <ul class="list-group outcome">
 	  {{#each modules}}
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}" mID={{moduleID}}>{{name}} - {{desc}}</a></li>
+          <li class="list-group-item"><a class="course-link" href="{{pathFor route='questionBoard'}}" mID={{moduleID}}>{{name}} - {{desc}}</a></li>
 	  {{/each}}
         </ul>
       </div>

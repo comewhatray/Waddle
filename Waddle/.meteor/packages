@@ -26,3 +26,4 @@ accounts-facebook
 session
 aldeed:collection2-core@2.0.0
 osv:mongo-counter
+email

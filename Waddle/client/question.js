@@ -28,6 +28,6 @@ Template.answer.helpers({
 Template.questionBox.events({
   'click #axe'(event, instance) {
     event.preventDefault();
-    Meteor.call('submitPost', instance.find('#postField').value, Session.get('currModule'), Meteor.userId());
+    Meteor.call('submitPost', instance.find('#postField').value, Session.get('currModule'));
   },
 });
