@@ -6,10 +6,8 @@
 			<div><span class="glyphicon glyphicon-chevron-down"></span></div>
 			<div class="time-ago">3h</div>
 		</div>
-			<div class="old-question col-xs-10 col-sm-11 panel panel-default">
-			<div>
+			<div class="old-question col-xs-10 col-sm-11 panel panel-default" qid={{questionID}}>
 			{{text}}
-			</div>
 			</div>
 	</div>
 	{{#if isAnswered answeredBy}} {{> answer}} {{/if}}
@@ -37,3 +35,5 @@
 		</form>
 	</div>
 </template>
+
+

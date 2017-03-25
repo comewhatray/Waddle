@@ -16,5 +16,6 @@ Questions.schema = new SimpleSchema({
   module: {type: Number},
   answeredBy: {type: Number},
   answerText: {type: String},
-  upvotes: {type: Number}
+  upvotes: {type: Number},
+  timestamp: {type: Date}
 });

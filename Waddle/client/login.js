@@ -9,7 +9,7 @@ Template.login.onCreated(function loginOnCreated() {
 	this.showNewAcc = new ReactiveVar(false);
 	this.emailsEqual = new ReactiveVar(false);
 	this.passwordsEqual = new ReactiveVar(false);
-	this.courseChoice = new ReactiveVar(0);
+	var courseChoice = 0;
 });
 
 //links to html page
@@ -66,7 +66,7 @@ Template.login.events({
 				password: password,
 				profile: {
 					// put things here
-					cID: courseChoice,
+					//cID: courseChoice,
 				}
 			}, function (error) {
 				if (error) {

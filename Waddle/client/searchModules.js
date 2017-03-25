@@ -28,7 +28,7 @@ Template.searchModules.events({
 });
 
 Template.searchResults.events({
-	'click .list-group-item'(event, instance) {
+	'click .course-link'(event, instance) {
 		Session.set('currModule', (parseInt(event.target.getAttribute('mID'))));
 	}
 });
