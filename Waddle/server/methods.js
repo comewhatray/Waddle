@@ -52,4 +52,16 @@ Meteor.methods({
 			
 		}
 	},
+	updateCourse(cID) {
+		usr = Meteor.user();
+		if (!!usr){
+			Meteor.users.update(
+			{ _id : usr._id },
+			{ $set:{
+				"profile.course":parseInt(cID),
+			}}
+			)
+			
+		}
+	},
 });

@@ -1,11 +1,11 @@
 // this is where you put things to access from the server and in the collections folder and collections further
 
 Meteor.publish('modules', function(){
-	return Modules.find({ $query:{}, $orderby:{ name : 1 }} );
+	return Modules.find({$query:{}, $orderby:{ name : 1 }} );
 });
 
 Meteor.publish('courses', function(){
-	return Courses.find();
+	return Courses.find({$query:{}, $orderby:{ name : 1 }});
 });
 
 Meteor.publish('questions', function(mod){	//module, or unanswered if mod = 0
