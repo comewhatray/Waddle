@@ -16,9 +16,12 @@ Template.questionBoard.onRendered(function(){
 
 Template.questionBoard.helpers({
   questions() {
-    return Questions.find();
+    return Questions.find({},{sort:{expireAt:-1}});
   },
   isAnswered(ansBy) {
     return ansBy != 0;
   },
+  loggedInStudent() {
+	return Session.get('isStudent');
+  }
 });

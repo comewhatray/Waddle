@@ -30,7 +30,7 @@ Template.lecturerCarousel.helpers({
 
 Template.answerBox.helpers({
   enabled() {
-    return enabled.get()?"working":"disabled";
+    return enabled.get()?"":"disabled";
   },
 });
 

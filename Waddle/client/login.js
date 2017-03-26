@@ -37,7 +37,7 @@ Template.newAcc.helpers({
 });
 
 Template.login.events({
-'click #submit' : function (e,t)
+	'click #submit' : function clickedSubmit(e,t)
 	{
 		e.preventDefault();
 		if(t.showNewAcc.get()){
@@ -47,16 +47,17 @@ Template.login.events({
 			password  = t.find('#pwd').value;
 			Meteor.loginWithPassword(userEmail, password);
 			//call backthing
+			Session.set('currModule', 0);
 			Router.go('/');
 		}
 	},
-'click .courseCode' : function (e,t)
+	'click .courseCode' : function (e,t)
 	{
 		courseChoice = e.target.cID;
 	},
 
 
-'click #create' : function (e,t)
+	'click #create' : function clickedCreate(e,t)
 	{
 		//prevent default -- e has its own code it will execute by default which we want to stop
 		e.preventDefault();
@@ -68,21 +69,23 @@ Template.login.events({
 				password: password,
 				profile: {
 					// put things here
-					//cID: courseChoice,
+					cID: courseChoice,
 				}
 			}, function (error) {
 				if (error) {
-					console.log("Cannot create user: "+ error.reason);
+					alert("Cannot create user: "+ error.reason);
 				}else{
-					//Router.go('/');
+					Router.go('/');
 					Meteor.call( 'sendVerificationLink');
 				}
 			});
 		}else{
+			t.emailsEqual.set(false);
+			t.passwordsEqual.set(false);
 			t.showNewAcc.set(true);
 		}
 	},
-'input #emailConf' : function(e,t)
+	'input #emailConf' : function(e,t)
 	{
 		if(((e.target.value == t.find("#email").value) != t.emailsEqual.curValue) && e.target.value.length>0){
 			t.emailsEqual.curValue = !t.emailsEqual.curValue;
@@ -90,7 +93,7 @@ Template.login.events({
 		}
 	},
 
-'input #pwdConf' : function(e,t)
+	'input #pwdConf' : function(e,t)
 	{
 		if(((e.target.value == t.find("#pwd").value) != t.passwordsEqual.curValue) && e.target.value.length>0){
 			t.passwordsEqual.curValue = !t.passwordsEqual.curValue;

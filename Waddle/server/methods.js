@@ -32,7 +32,8 @@ Meteor.methods({
 				answeredBy : 0,
 				answerText : "",
 				upvotes : 0,
-				timestamp : new Date()
+				timestamp : new Date(),
+				expireAt: new Date(Date.now()+604800000)			//default TTL: 604,800,000 ms, or 1 week.
 			}
 			if(!Questions.schema.newContext().validate(newPost)) {console.log("Invalid post"); return;} //validate
 
@@ -42,11 +43,16 @@ Meteor.methods({
 	submitResponse(tbody, qID) {
 		responder = Meteor.user()
 		if (isLecturer(responder) && tbody.length >= 10){
+			toAnswer = Questions.findOne({questionID : qID});
+			if(!!toAnswer && toAnswer.answeredBy == 0){
+				newDate = new Date(toAnswer.expireAt.getTime()+259200000);	//A lecturer answer extends TTL by 3 days.
+			}else{ return; }
 			Questions.update(
 			{ questionID : qID },
 			{ $set:{
 				answeredBy:responder.profile.userId,
 				answerText:tbody,
+				expireAt:newDate,
 			}}
 			)
 			
