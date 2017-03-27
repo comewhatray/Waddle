@@ -7,7 +7,7 @@ import './question.html';
 	}}
 	);
 
-Template.question.onCreated(function questionOnCreated() {
+Template.question.onCreated(function () {
 
 });
 
@@ -16,18 +16,21 @@ Template.question.helpers({
   isAnswered(ansBy) {
     return ansBy != 0;
   },
+  isStudent() {
+	return Session.get('isStudent');
+  }
 });
 
 Template.answer.helpers({
   getName(id) {
 	flname = Meteor.users.findOne({"profile.userId":id}).profile.name[0];
 	return (flname.first + " " + flname.last);
-  }
+  },
 });
 
 Template.questionBox.events({
   'click #axe'(event, instance) {
     event.preventDefault();
-    Meteor.call('submitPost', instance.find('#postField').value, Session.get('currModule'), Meteor.userId());
+    Meteor.call('submitPost', instance.find('#postField').value, Session.get('currModule'));
   },
 });

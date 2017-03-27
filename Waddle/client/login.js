@@ -4,6 +4,8 @@ import { Template } from 'meteor/templating';
 //gives javascript variable things -- 
 import { ReactiveVar } from 'meteor/reactive-var';
 
+var courseChoice;
+
 // sets up variables for when needed
 Template.login.onCreated(
 	function loginOnCreated() {
@@ -34,6 +36,7 @@ Template.newAcc.helpers({
 	isLect(){
 		return Session.get('isLect');
 	}
+
 });
 
 //links to html page
@@ -164,109 +167,6 @@ Template.details.events({
 	},
 
 })
-
-
-
-
-
-
-/*
-
-
-//this togles login vs register
-Template.login.helpers({
-	showNewAcc() {
-		if(Template.instance().showNewAcc.get()){
-			return true;
-		}
-	return false;
-	}
-});
-
-// does things related to courses and stuff... magic
-Template.newAcc.helpers({
-	courses() {
-		return Courses.find();
-	}
-});
-
-Template.login.events({
-'click #submit' : function (e,t)
-	{
-		e.preventDefault();
-		if(t.showNewAcc.get()){
-			t.showNewAcc.set(false);	
-		}else{
-			var userEmail = t.find('#email').value,
-			password  = t.find('#pwd').value;
-			Meteor.loginWithPassword(userEmail, password);
-			//call backthing
-			Router.go('/');
-		}
-	},
-'click .courseCode' : function (e,t)
-	{
-		courseChoice = e.target.cID;
-	},
-
-
-'click #create' : function (e,t)
-	{
-		var isEmailValid = function(address) {
-  			//return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(address);
-
-  			return true;
-		};
-
-		if(isEmailValid(t.find('#email').value)){
-
-			//prevent default -- e has its own code it will execute by default which we want to stop
-			e.preventDefault();
-			if(t.showNewAcc.get()){
-				var userEmail = t.find('#email').value,
-				password  = t.find('#pwd').value;
-				Accounts.createUser({
-					email:    userEmail,
-					password: password,
-					profile: {
-						// put things here
-						cID: courseChoice,
-						registration: false,
-					}
-				}, function (error) {
-					if (error) {
-						console.log("Cannot create user");
-					}
-				});
-				Router.go('/');
-			}else{
-				t.showNewAcc.set(true);
-			}
-		}
-		else{
-		}
-
-	},
-'input #emailConf' : function(e,t)
-	{
-		if((t.find("#emailConf").value == t.find("#email").value) != Session.get('emailsEqual') && t.find("#emailConf").length>0){
-			Session.set('emailsEqual', !(Session.get('emailsEqual')));
-			$(t.target).toggleClass('valid');
-		}
-	},
-
-'input #pwdConf' : function(e,t)
-	{
-		if((e.target.value == $('#pwd')[0].value) != Session.get('passwordsEqual') && e.target.value.length>0){
-			Session.set('passwordsEqual', !(Session.get('passwordsEqual')));
-			$(e.target).toggleClass('valid');
-		}
-	}
-});
-*/
-
-
-
 
 
 

@@ -1,0 +1,61 @@
+<template name="settingz">
+<div class="col-md-4 col-md-offset-4">
+<div class="form-group row">
+	<div class="col-xs-10">
+  <label for="text-input" class="col-2 col-form-label">Email</label>
+    <input class="form-control" type="text" placeholder ="Enter new email" id="email-input">
+    </div>
+</div>
+<div class="form-group row">
+	<div class="col-xs-10">
+  <label for="search-input" class="col-2 col-form-label">Office Hours</label>
+    <input class="form-control" type="text" placeholder="Enter office hours" id="officeHours-input">
+    </div>
+</div>
+<div class="form-group row">
+	<div class="col-xs-10">
+  <label for="url-input" class="col-2 col-form-label">Webpage</label>
+    <input class="form-control" type="url" placeholder="Enter webpage URL" id="webpage-input">
+    </div>
+</div>
+<div class="form-group row">
+	<div class="col-xs-10">
+  <label for="tel-input" class="col-2 col-form-label">Modules</label>
+    <input class="form-control" type="modules" placeholder="Enter modules separated by a comma" id="modules-input">
+    </div>
+</div>
+<div class="form-group row">
+	<div class="col-xs-10">
+  <label for="tel-input" class="col-2 col-form-label">Confirm Passord</label>
+    <input class="form-control" type="password" placeholder="Enter password" id="password-input">
+    </div>
+</div>
+</div>
+
+</template>
+
+<template name="settings">
+	<div class="row">
+		<div class="col-xs-2 col-sm-4"></div>
+		<div class="col-xs-8 col-sm-4">
+			<div class="form-group">
+				<label for="selC">Select Course:</label>
+				<select class="form-control" id="selC">
+					<option class="courseChoice" cID={{ccID}}>{{currCourseName}}</option>
+					{{#each otherCourses}}
+						<option class="courseChoice" cID={{courseID}}>{{name}}</option>
+					{{/each}}
+				</select>
+			</div>
+			<div class="panel panel-default change-pw">
+				<label><strong>Change Password</strong></label>
+				<input class="form-control" type="password" placeholder="Enter old password:" id="old-password-input">
+				<br>
+				<input class="form-control" placeholder="Enter new password:" id="new-password-input">
+			</div>
+			<button type="submit" class="btn btn-danger" id="cancel">Cancel</button>
+			<button type="submit" class="btn btn-primary" id="save">Save</button>
+		</div>		
+		<div class="col-xs-2 col-sm-4"></div>
+	</div>		
+</template>

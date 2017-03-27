@@ -1,9 +1,9 @@
-<template name="searchModules">
+<template name="search">
   <div class="row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
     <div class="input-group">
-      <input type="text" class="form-control" id="lectureSearch" placeholder="Choose a course or lecturer.">
+      <input type="text" class="form-control" id="lectureSearch" placeholder="Choose a {{choice}}">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
       </span>
@@ -23,9 +23,15 @@
 <template name="searchResults">
 <div class="search-results">
         <ul class="list-group outcome">
-	  {{#each modules}}
-          <li class="list-group-item"><a href="{{pathFor route='questionBoard'}}" mID={{moduleID}}>{{name}} - {{desc}}</a></li>
-	  {{/each}}
+	  {{#if hasCourse}}
+	    {{#each modules}}
+            <li class="list-group-item"><a class="module-link" href="{{pathFor route='questionBoard'}}" mID={{moduleID}}>{{name}} - {{desc}}</a></li>
+	    {{/each}}
+	  {{else}}
+	    {{#each courses}}
+            <li class="list-group-item"><a class="course-link" href="#" cID={{courseID}}>{{name}}</a></li>
+	    {{/each}}
+	  {{/if}}
         </ul>
       </div>
 </template>
