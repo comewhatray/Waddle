@@ -33,7 +33,8 @@ Meteor.methods({
 				answerText : "",
 				upvotes : 0,
 				timestamp : new Date(),
-				expireAt: new Date(Date.now()+604800000)			//default TTL: 604,800,000 ms, or 1 week.
+				expireAt: new Date(Date.now()+604800000),			//default TTL: 604,800,000 ms, or 1 week.
+				upvoteList: []
 			}
 			if(!Questions.schema.newContext().validate(newPost)) {console.log("Invalid post"); return;} //validate
 
@@ -69,5 +70,48 @@ Meteor.methods({
 			)
 			
 		}
+	},
+	upvote(pID, isPositive) {
+		post = Questions.findOne({questionID : pID});
+		if(!post) return;
+		usr = Meteor.user();
+		if(!isStudent(usr)) return;				//Only students can vote
+		uID = usr.profile.userId;
+		if(post.askedBy == uID) return;				//Can't upvote your own post
+		upV = post.upvoteList.indexOf(uID) != -1;
+		downV = post.upvoteList.indexOf(0-uID) != -1;
+		var mult;
+		if(isPositive) {
+			if(upV) return;
+			mult = downV?2:1;
+		}else {
+			if(downV) return;
+			mult = upV?-2:-1;
+		}
+		dttl = 7200000*mult;
+		newTTL = new Date(post.expireAt.getTime()+dttl);
+		doot = isPositive?uID:0-uID;
+		var newVotes = post.upvotes+mult;
+		if((isPositive && downV) || (!isPositive && upV)){	//Changed vote
+			Questions.update(
+			{questionID:pID,upvoteList:-doot},
+			{$set:{
+				"upvoteList.$":doot,
+				"expireAt":newTTL,
+				"upvotes": newVotes,
+				}}
+			);	
+		}else{							//New vote
+			Questions.update(
+				{questionID:pID},
+				{
+	                        "$push":{"upvoteList":doot},
+				"$set":{
+					"expireAt":newTTL,
+					"upvotes": newVotes,
+				}
+			});
+		}
+		return newVotes;
 	},
 });

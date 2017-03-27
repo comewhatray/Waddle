@@ -18,5 +18,6 @@ Questions.schema = new SimpleSchema({
   answerText: {type: String},
   upvotes: {type: Number},
   timestamp: {type: Date},
-  expireAt: {type: Date}
+  expireAt: {type: Date},
+  upvoteList: {type: Array}
 });
