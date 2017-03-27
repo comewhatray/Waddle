@@ -5,11 +5,35 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 // sets up variables for when needed
-Template.login.onCreated(function loginOnCreated() {
-	this.showNewAcc = new ReactiveVar(false);
-	this.emailsEqual = new ReactiveVar(false);
-	this.passwordsEqual = new ReactiveVar(false);
-	this.courseChoice = new ReactiveVar(0);
+Template.login.onCreated(
+	function loginOnCreated() {
+	//this.logInScreen = new ReactiveVar(true);
+
+	Session.set('logInScreen', true);
+	Session.set('email1', "");
+	Session.set('emailConfimation', "");
+	Session.set('password', "");
+	Session.set('passwordConfirmation' , "");
+	Session.set('passwordsEqual', false);
+	Session.set('emailsEqual', false);
+	Session.set('emailValid', false);
+	Session.set('isLect', true);
+});
+
+Template.login.helpers({
+	logInScreen(){
+		return Session.get('logInScreen');
+	}
+})
+
+Template.newAcc.helpers({
+	courses() {
+		return Courses.find();
+	}, 
+
+	isLect(){
+		return Session.get('isLect');
+	}
 });
 
 //links to html page
@@ -19,6 +43,137 @@ Meteor.subscribe('courses', {onReady: function(){
 
 }});
 
+Template.oldAcc.events({
+
+	'click #goCreateAcc' : function(e,t){
+		e.preventDefault();
+		Session.set('logInScreen', false);
+	},
+
+	'click .signInButton' : function (e,t)
+	{
+		e.preventDefault();
+		
+		Meteor.loginWithPassword(Session.get('email1'), Session.get('password'));
+		Router.go('/');	
+	},
+
+})
+
+Template.newAcc.events({
+//e = event, t = instance
+	'click #returnToLogin' : function(e,t){
+		e.preventDefault();
+		Session.set('logInScreen', true);
+	},
+
+	'click #lectSelect': function(e,t){
+		console.log(t.find('#lectSelect').value);
+	},
+
+	'click #createAccount':function(e,t){
+
+		e.preventDefault();
+		console.log(Session.get('passwordsEqual'));
+		console.log(Session.get('emailsEqual'));
+		console.log(Session.get('emailValid'));
+
+  		if( ( Session.get('passwordsEqual') && Session.get('emailsEqual') )){ //&& Session.get('emailValid')
+  			//password  = t.find('#pwd').value;
+  			console.log('hello');
+			Accounts.createUser({
+				email:    Session.get('email1'),
+				password: Session.get('password'),
+				profile: {
+				// put things here
+
+				cID: Session.get('courseChoice'),
+				registration: false
+				}
+			})
+
+			console.log('plz');
+			Router.go('/');
+		} 
+		else{
+			console.log('you done goofed');
+		}  		
+	},
+
+	'input #emailConf': function(e,t){
+		Session.set('emailConfimation', t.find('#emailConf').value);
+
+		if((Session.get('emailConfimation') == Session.get('email1')) && Session.get('email1') != "")
+		{
+			$(e.target).toggleClass('valid');
+			Session.set('emailsEqual', true);
+		}else if(Session.get('emailsEqual')){
+			$(e.target).toggleClass('valid');
+			Session.set('emailsEqual', false);
+		}
+
+		Session.set('emailValid', /(.+)@(.+){2,}\.(.+){2,}/.test(Session.get('emailConf')));
+		console.log(Session.get('emailValid'));
+	},
+
+	'input #pwdConf': function(e,t){
+		Session.set('passwordConfirmation', t.find('#pwdConf').value);
+		if((Session.get('passwordConfirmation') == Session.get('password')) && Session.get('password') != "")
+		{
+			$(e.target).toggleClass('valid');
+			Session.set('passwordsEqual', true);
+
+		}else if(Session.get('passwordsEqual')){
+			$(e.target).toggleClass('valid');
+			Session.set('passwordsEqual', false);
+		}
+		
+	},
+
+	'click .courseCode' : function (e,t)
+	{
+		Session.set('courseChoice', e.target.cID);
+	},
+
+	'click #isStudent': function(e,t){
+		e.preventDefault();
+		Session.set('isLect', true);
+		console.log('blargh');
+	},
+
+	'click #isLect': function(e,t){
+		e.preventDefault();
+		Session.set('isLect', false);
+		console.log('blargh elle');
+
+	},
+
+	
+})
+
+Template.details.events({
+
+	'input #email' : function(e,t)
+	{
+		Session.set('email1', t.find('#email').value);
+	},
+
+	'input #pwd' : function(e,t)
+	{
+		Session.set('password', t.find('#pwd').value);
+	},
+
+})
+
+
+
+
+
+
+/*
+
+
+//this togles login vs register
 Template.login.helpers({
 	showNewAcc() {
 		if(Template.instance().showNewAcc.get()){
@@ -28,6 +183,7 @@ Template.login.helpers({
 	}
 });
 
+// does things related to courses and stuff... magic
 Template.newAcc.helpers({
 	courses() {
 		return Courses.find();
@@ -56,43 +212,67 @@ Template.login.events({
 
 'click #create' : function (e,t)
 	{
-		//prevent default -- e has its own code it will execute by default which we want to stop
-		e.preventDefault();
-		if(t.showNewAcc.get()){
-			var userEmail = t.find('#email').value,
-			password  = t.find('#pwd').value;
-			Accounts.createUser({
-				email:    userEmail,
-				password: password,
-				profile: {
-					// put things here
-					cID: courseChoice,
-				}
-			}, function (error) {
-				if (error) {
-					console.log("Cannot create user: "+ error.reason);
-				}else{
-					//Router.go('/');
-					Meteor.call( 'sendVerificationLink');
-				}
-			});
-		}else{
-			t.showNewAcc.set(true);
+		var isEmailValid = function(address) {
+  			//return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(address);
+
+  			return true;
+		};
+
+		if(isEmailValid(t.find('#email').value)){
+
+			//prevent default -- e has its own code it will execute by default which we want to stop
+			e.preventDefault();
+			if(t.showNewAcc.get()){
+				var userEmail = t.find('#email').value,
+				password  = t.find('#pwd').value;
+				Accounts.createUser({
+					email:    userEmail,
+					password: password,
+					profile: {
+						// put things here
+						cID: courseChoice,
+						registration: false,
+					}
+				}, function (error) {
+					if (error) {
+						console.log("Cannot create user");
+					}
+				});
+				Router.go('/');
+			}else{
+				t.showNewAcc.set(true);
+			}
 		}
+		else{
+		}
+
 	},
 'input #emailConf' : function(e,t)
 	{
-		if(((e.target.value == t.find("#email").value) != t.emailsEqual.curValue) && e.target.value.length>0){
-			t.emailsEqual.curValue = !t.emailsEqual.curValue;
-			$(e.target).toggleClass('valid');
+		if((t.find("#emailConf").value == t.find("#email").value) != Session.get('emailsEqual') && t.find("#emailConf").length>0){
+			Session.set('emailsEqual', !(Session.get('emailsEqual')));
+			$(t.target).toggleClass('valid');
 		}
 	},
 
 'input #pwdConf' : function(e,t)
 	{
-		if(((e.target.value == t.find("#pwd").value) != t.passwordsEqual.curValue) && e.target.value.length>0){
-			t.passwordsEqual.curValue = !t.passwordsEqual.curValue;
+		if((e.target.value == $('#pwd')[0].value) != Session.get('passwordsEqual') && e.target.value.length>0){
+			Session.set('passwordsEqual', !(Session.get('passwordsEqual')));
 			$(e.target).toggleClass('valid');
 		}
 	}
 });
+*/
+
+
+
+
+
+
+
+
+
+
+
+
