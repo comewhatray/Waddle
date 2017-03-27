@@ -1,46 +1,64 @@
 <!-- Login in screen tepmlate-->
 
 <template name="login">
-<div class="container container-table">
-  <div class="row vertical-center-row">
-    <div class="col-sm-4"> <!-- the left side--></div>
-    <form class="login-form col-sm-4">
-        <!-- center of screen-->
-        <div class="form-group">
-            <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email">
-        </div>
-        <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd">
-        </div>
 
-    <!--  Logic to determine if it is a new account and such-->
 
-    <!-- this uses data from the login.js-->
-	{{#if showNewAcc}}
-    		{{> newAcc}}
-	{{else}}
-		<div class="checkbox">
-			<label><input type="checkbox"> Remember me</label>
-        	</div>
-	{{/if}}
-	<button type="submit" id="submit" class="btn btn-default">
-	{{#if showNewAcc}}
-    		<span class="glyphicon glyphicon-arrow-left"></span>
-	{{else}}
-		Login
-	{{/if}}
-	</button>
-        <button type="create" id="create" class="btn btn-default">Create account</button>
-    </form>
-    <div class="col-sm-4"> <!-- right of screen--></div>
-  </div>
-</div>
+    <div class="container container-table">
+        <form class="login-form">
+
+             {{#if logInScreen}}
+                 {{> oldAcc}}
+             {{else}}
+                 {{> newAcc}}
+             {{/if}}
+
+        </form>
+
+    </div> 
+    
 </template>
 
-<!-- the template used when there is a new account created-->
+<!-- ................................................................................................................... -->
+
+<template name="oldAcc">
+    
+  <div class="row vertical-top-row">
+
+    <div class="col-sm-3"> <!-- the left side--></div>
+
+        <div class="col-sm-6">
+            <!-- center of screen-->
+            {{> details}}
+
+            <div class="checkbox">
+                <label><input type="checkbox"> Remember me</label>
+                </div>
+
+
+            <button type="submit" class="btn btn-default signInButton">Submit</button>
+            <button type="create" id="goCreateAcc" class="btn btn-default">Create account</button>
+
+            </div>
+
+        <div class="col-sm-3"> <!-- right of screen-->
+
+    </div>
+    
+
+  </div>
+   
+
+
+</template>
+
+<!-- ................................................................................................................... -->
+
 <template name="newAcc">
+    
+    <div class="col-sm-5">
+
+        {{> details}}
+
         <div class="form-group">
             <label for="email">Confirm Email:</label>
             <input type="email" class="form-control confirm" id="emailConf">
@@ -50,17 +68,63 @@
             <input type="password" class="form-control confirm" id="pwdConf">
         </div>
 
+    </div>
+
+    <div class="col-sm-1"></div>
+
+    <div class="col-sm-6">
+
+
+        <div class="btn-group" data-toggle="buttons" value="true">
+
+            <label class="btn btn-primary active">
+                <input type="radio" name="studentToggle" checked="checked" value="true" id='isStudent'> Student
+            </label>
+            <label class="btn btn-primary" type="radio">
+                <input type="radio" name="lectureToggle" value="false" id="isLect"> 
+                Lecturer
+            </label>
+        </div>
+
+    {{#if isLect}}
+        
         <div class="form-group">
           <label for="sel1">Select Course:</label>
           <select class="form-control" id="sel1">
-
             {{#each courses}}
-            <option cID={{courseID}}>{{name}}</option>
+            <option cID={{courseID}} class="courseCode">{{name}}</option>
             {{/each}}
           </select>
         </div>
 
-      
+    {{/if}}
+    
+    <button type="submit" class="btn btn-default" id="returnToLogin"> <span class="glyphicon glyphicon-arrow-left"></span> </button>
+    <button type="submit" id="createAccount" class="btn btn-default">Create account</button>
 
-        <!--{{> searchResults}}-->
+    </div>
 </template>
+
+<!-- ................................................................................................................... -->
+
+<template name="details">
+
+    <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" id="email">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+        </div>    
+
+</template>
+
+
+
+
+
+
+
+
+
