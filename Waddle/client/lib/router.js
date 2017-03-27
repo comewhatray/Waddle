@@ -4,10 +4,9 @@ Router.configure({
 
 Router.route('/', function () {
   user = Meteor.user();
-  if(!user){
-    this.render('searchModules');	//this will need to be updated
-  }else if(user.profile.userId>0){
-    this.render('searchModules');
+  if(!user) Session.set('currCourse', 0);
+  if(!user || user.profile.userId>0){
+    this.render('search');
   }else{
     this.render('lecturerCarousel');
   }
