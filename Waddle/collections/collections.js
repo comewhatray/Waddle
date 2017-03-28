@@ -6,7 +6,9 @@ Questions = new Mongo.Collection('questions');
 Modules.schema = new SimpleSchema({
   moduleID: {type: Number},
   name: {type: String},
-  desc: {type: String}
+  desc: {type: String},
+  courses: {type: Array, minCount: 1},
+  'courses.$': Number,
 });
 
 Questions.schema = new SimpleSchema({
@@ -20,4 +22,9 @@ Questions.schema = new SimpleSchema({
   timestamp: {type: Date},
   expireAt: {type: Date},
   upvoteList: {type: Array}
+});
+
+Courses.schema = new SimpleSchema({
+  courseID: {type: Number},
+  name: {type: String}
 });

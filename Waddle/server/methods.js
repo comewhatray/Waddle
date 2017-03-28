@@ -23,7 +23,6 @@ Meteor.methods({
 		poster = Meteor.user()
 		if (isStudent(poster) && mID != 0){
 			var qID = incrementCounter('counters', 'postID');
-			console.log(qID);
 			newPost = {
 				questionID : qID,
 				text : tbody,
@@ -113,5 +112,32 @@ Meteor.methods({
 			});
 		}
 		return newVotes;
+	},
+	addCourse(cName) {
+		usr = Meteor.user();
+		if (!!usr && usr.profile.userId < 0){
+			var cID = incrementCounter('counters', 'courseID');
+			newCourse = {
+				courseID : cID,
+				name: cName
+			};
+			if(!Courses.schema.newContext().validate(newCourse)) {console.log("Invalid course"); return;}
+			Courses.insert(newCourse);		
+		}
+	},
+	addModule(mName, mDesc, courseList) {
+		if(!Array.isArray(courseList)) {console.log("Course list must be an array"); return;}
+		usr = Meteor.user();
+		if (!!usr && usr.profile.userId < 0){
+			var mID = incrementCounter('counters', 'moduleID');
+			newMod = {
+				moduleID : mID,
+				name: mName,
+				desc: mDesc,
+				courses: courseList
+			};
+			if(!Modules.schema.newContext().validate(newMod)) {console.log("Invalid module"); return;}
+			Modules.insert(newMod);		
+		}
 	},
 });
