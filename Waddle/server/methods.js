@@ -126,7 +126,7 @@ Meteor.methods({
 		}
 	},
 	setModule(mName, mDesc, courseList) {
-		if(!Array.isArray(courseList)) {console.log("Course list must be an array"); return;}
+		if(!Array.isArray(courseList)) throw new Meteor.Error("", "Course list must be an array");
 		usr = Meteor.user();
 		if (!!usr && usr.profile.userId < 0){
 			if(!!Modules.findOne({name: mName})){				//Update a module
@@ -163,5 +163,34 @@ Meteor.methods({
 			}
 		}
 		return newAcc;
-	}
+	},
+	newLecturer(newEmail, pwd, fName, lName) {
+		if(!!Meteor.user()) throw new Meteor.Error("", "You are already logged in!");
+		if(!Courses.findOne({courseID:choice})) throw new Meteor.Error("", "Course not found in database.");
+		newID = decrementCounter('counters', 'lecturerID');
+		newAcc = {
+			email: newEmail,
+			password: pwd,
+			profile:{
+				modules: [],
+				userId: newID,
+				name :
+            			{
+		                first : fName,
+		                last : lName
+				},
+			}
+		}
+		return newAcc;
+	},
+	updateJurisdiction(newList){
+		if(!Array.isArray(newList)) throw new Meteor.Error("", "New list must be an array");
+		usr = Meteor.user();
+		if(!usr || usr.profile.userId >= 0) return;
+		Meteor.users.update(
+			{ _id : usr._id },
+			{ $set:{
+				"profile.modules":newList
+			}});
+		}
 });
