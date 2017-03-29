@@ -56,9 +56,7 @@ Template.oldAcc.events({
 	'click .signInButton' : function (e,t)
 	{
 		e.preventDefault();
-		
-		Meteor.loginWithPassword(Session.get('email1'), Session.get('password'));
-		Router.go('/');	
+		Meteor.loginWithPassword(Session.get('email1'), Session.get('password'), function(error){if (!!error) {alert(error.reason)} else {Router.go('/')}});	
 	},
 
 })
@@ -77,57 +75,47 @@ Template.newAcc.events({
 	'click #createAccount':function(e,t){
 
 		e.preventDefault();
-		console.log(Session.get('passwordsEqual'));
-		console.log(Session.get('emailsEqual'));
-		console.log(Session.get('emailValid'));
 
   		if( ( Session.get('passwordsEqual') && Session.get('emailsEqual') )){ //&& Session.get('emailValid')
-  			//password  = t.find('#pwd').value;
-  			console.log('hello');
-			Accounts.createUser({
-				email:    Session.get('email1'),
-				password: Session.get('password'),
-				profile: {
-				// put things here
-
-				cID: Session.get('courseChoice'),
-				registration: false
+			var sel = t.find("#sel1");
+			sel = parseInt(sel[sel.selectedIndex].getAttribute("cid"));
+			console.log(sel);
+  			Meteor.call('newStudent', Session.get('email1'), Session.get('password'), sel, function(error, result){
+				if(!!error) alert(error.reason);
+				if(!!result) {
+					console.log(result);
+					Accounts.createUser(result, function(e2){ if(!!e2){ alert(e2.reason); }else{ Router.go('/');} });
 				}
-			})
-
-			console.log('plz');
-			Router.go('/');
+			});
 		} 
 		else{
-			console.log('you done goofed');
+			t.find('#invalid').innerHTML = "Please confirm that the emails and passwords match.";
 		}  		
 	},
 
-	'input #emailConf': function(e,t){
+	'input .inEmail': function(e,t){
 		Session.set('emailConfimation', t.find('#emailConf').value);
 
 		if((Session.get('emailConfimation') == Session.get('email1')) && Session.get('email1') != "")
 		{
-			$(e.target).toggleClass('valid');
+			$(t.find('#emailConf')).toggleClass('valid');
 			Session.set('emailsEqual', true);
+			//Session.set('emailValid', /(.+)@(.+){2,}\.(.+){2,}/.test(Session.get('emailConf')));
 		}else if(Session.get('emailsEqual')){
-			$(e.target).toggleClass('valid');
+			$(t.find('#emailConf')).toggleClass('valid');
 			Session.set('emailsEqual', false);
 		}
-
-		Session.set('emailValid', /(.+)@(.+){2,}\.(.+){2,}/.test(Session.get('emailConf')));
-		console.log(Session.get('emailValid'));
 	},
 
-	'input #pwdConf': function(e,t){
+	'input .inPwd': function(e,t){
 		Session.set('passwordConfirmation', t.find('#pwdConf').value);
 		if((Session.get('passwordConfirmation') == Session.get('password')) && Session.get('password') != "")
 		{
-			$(e.target).toggleClass('valid');
+			$(t.find('#pwdConf')).toggleClass('valid');
 			Session.set('passwordsEqual', true);
 
 		}else if(Session.get('passwordsEqual')){
-			$(e.target).toggleClass('valid');
+			$(t.find('#pwdConf')).toggleClass('valid');
 			Session.set('passwordsEqual', false);
 		}
 		
@@ -141,13 +129,11 @@ Template.newAcc.events({
 	'click #isStudent': function(e,t){
 		e.preventDefault();
 		Session.set('isLect', true);
-		console.log('blargh');
 	},
 
 	'click #isLect': function(e,t){
 		e.preventDefault();
 		Session.set('isLect', false);
-		console.log('blargh elle');
 
 	},
 

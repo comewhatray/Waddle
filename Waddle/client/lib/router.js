@@ -5,6 +5,7 @@ Router.configure({
 Router.route('/', function () {
   user = Meteor.user();
   if(!user) Session.set('currCourse', 0);
+  Session.set('password', '');
   if(!user || user.profile.userId>0){
     this.render('search');
   }else{
@@ -30,4 +31,10 @@ Router.route('/settings', function () {
   this.render('settings');
 }, {
 	name: 'settings'
+});
+
+Router.route('/selector', function () {
+  this.render('selector');
+}, {
+	name: 'selector'
 });

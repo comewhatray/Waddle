@@ -18,3 +18,7 @@ display:inline;
 .confirm .valid {
 	background-color: #ccc;
 }
+
+#invalid {
+	color: #f44;
+}

@@ -121,23 +121,47 @@ Meteor.methods({
 				courseID : cID,
 				name: cName
 			};
-			if(!Courses.schema.newContext().validate(newCourse)) {console.log("Invalid course"); return;}
+			if(!Courses.schema.newContext().validate(newCourse) || !!Courses.findOne({name: cName})) {console.log("Invalid course"); return;}
 			Courses.insert(newCourse);		
 		}
 	},
-	addModule(mName, mDesc, courseList) {
+	setModule(mName, mDesc, courseList) {
 		if(!Array.isArray(courseList)) {console.log("Course list must be an array"); return;}
 		usr = Meteor.user();
 		if (!!usr && usr.profile.userId < 0){
-			var mID = incrementCounter('counters', 'moduleID');
-			newMod = {
-				moduleID : mID,
-				name: mName,
-				desc: mDesc,
-				courses: courseList
-			};
-			if(!Modules.schema.newContext().validate(newMod)) {console.log("Invalid module"); return;}
-			Modules.insert(newMod);		
+			if(!!Modules.findOne({name: mName})){				//Update a module
+				Modules.update(
+					{name:mName},
+					{$set:{
+						"desc":mDesc,
+						"courseList":courseList
+					}}
+				);
+			}else{								//add new module
+				var mID = incrementCounter('counters', 'moduleID');
+				newMod = {
+					moduleID : mID,
+					name: mName,
+					desc: mDesc,
+					courses: courseList
+				};
+				if(!Modules.schema.newContext().validate(newMod)) {console.log("Invalid module"); return;}
+				Modules.insert(newMod);		
+			}
 		}
 	},
+	newStudent(newEmail, pwd, choice) {
+		if(!!Meteor.user()) throw new Meteor.Error("", "You are already logged in!");
+		if(!Courses.findOne({courseID:choice})) throw new Meteor.Error("", "Course not found in database.");
+		newID = incrementCounter('counters', 'studentID');
+		newAcc = {
+			email: newEmail,
+			password: pwd,
+			profile:{
+				course: choice,
+				userId: newID
+			}
+		}
+		return newAcc;
+	}
 });
