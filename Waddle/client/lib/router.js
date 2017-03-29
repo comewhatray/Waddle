@@ -34,7 +34,7 @@ Router.route('/settings', function () {
 });
 
 Router.route('/selector', function () {
-  this.render('selector');
+  this.render('moduleEditor');
 }, {
 	name: 'selector'
 });

@@ -46,3 +46,14 @@
 </div>
 <button type="submit" class="btn btn-primary" id="setModules">Save</button>
 </template>
+
+<template name="moduleEditor">
+<div class="search-results">
+  <ul class="list-group outcome" id="courseList">
+    {{#each courses}}
+      <li class="list-group-item course-selector" cID={{courseID}}>{{name}}</li>
+    {{/each}}
+  </ul>
+</div>
+<button type="submit" class="btn btn-primary" id="submitModule">Save</button>
+</template>

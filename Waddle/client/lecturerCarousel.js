@@ -21,7 +21,9 @@ Template.lecturerCarousel.helpers({
     return ansBy == 0;
   },
   modules() {
-    return Modules.find();
+    var usr = Meteor.user();
+    if(!usr || !usr.profile.modules) return;
+    return Modules.find({moduleID: {$in : usr.profile.modules }});
   },
   first(index) {
     return index==0;

@@ -49,6 +49,13 @@ Template.selector.helpers({
 	}
 });
 
+Template.moduleEditor.helpers({
+	courses() {
+		return Courses.find({}, {name:1});
+	},
+});
+
+
 
 Template.selector.events({
 	'click .module-selector'(e,t) {
@@ -62,6 +69,22 @@ Template.selector.events({
 			if(classes[i].classList.contains("chosen")) newJ.push(parseInt(classes[i].getAttribute("mID")));
 		}
 		Meteor.call('updateJurisdiction', newJ);
+	},
+});
+
+Template.moduleEditor.events({
+	'click .course-selector'(e,t) {
+		$(e.target).toggleClass('chosen');
+	},
+	'click #submitModule'(e,t) {
+		var modCourses = [];
+		list = t.find("#courseList");
+		classes = list.getElementsByTagName("li");
+		for(i=0; i<classes.length; i++){
+			if(classes[i].classList.contains("chosen")) modCourses.push(parseInt(classes[i].getAttribute("cID")));
+		}
+		console.log(modCourses);
+		//Meteor.call('setModule', /*MODULE CODE*/, /*MODULE DESCRIPTION*/, modCourses);
 	},
 });
 
