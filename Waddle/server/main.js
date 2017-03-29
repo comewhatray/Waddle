@@ -12,3 +12,14 @@ Meteor.startup(function () {
   process.env.MAIL_URL = "smtp://axemreg%40gmail.com:axemaxem@smtp.gmail.com:465/"; 
 });
 
+Accounts.onCreateUser(function (options, user) {
+    if (!user.services.facebook) {
+        return user;
+    }
+    user.emails = [{address: user.services.facebook.email}];
+    user.profile = {
+        userId : incrementCounter('counters', 'studentID'),
+        course : 0
+    }
+    return user;
+});

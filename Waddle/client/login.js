@@ -79,6 +79,16 @@ Template.oldAcc.events({
 		e.preventDefault();
 		Meteor.loginWithPassword(Session.get('email1'), Session.get('password'), function(error){if (!!error) {alert(error.reason)} else {Router.go('/')}});	
 	},
+	'click .login-facebook': function(e) {
+		e.preventDefault();
+		Meteor.loginWithFacebook(function(err){
+		if (err) {
+			console.log(err);
+			alert(err.message);
+            	}else{
+		Router.go('/');
+        	}});
+    	}
 
 })
 

@@ -104,6 +104,8 @@ Template.searchResults.events({
 		Session.set('currModule', (parseInt(event.target.getAttribute('mID'))));
 	},
 	'click .course-link'(event, instance) {
-		Session.set('currCourse', (parseInt(event.target.getAttribute('cID'))));
+		nextCourse = parseInt(event.target.getAttribute('cID'));
+		Session.set('currCourse', nextCourse);
+		if(!!Meteor.user() && Meteor.user().profile.course==0) Meteor.call('updateCourse', nextCourse);
 	}
 });

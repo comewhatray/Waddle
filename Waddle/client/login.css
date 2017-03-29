@@ -22,3 +22,15 @@ display:inline;
 #invalid {
 	color: #f44;
 }
+
+.login-facebook {
+	color: #fff;
+	background-color: #3b5998;
+	border-color: rgba(0,0,0,0.2);
+	position: relative;
+	margin-bottom: 20px;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
