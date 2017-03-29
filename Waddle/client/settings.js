@@ -18,6 +18,10 @@ Template.settings.helpers({
 	otherCourses() {
 		cc = Session.get('currCourse');
 		return Courses.find({courseID:{$ne:cc}});
+	},
+
+	isStudent(){
+		return Session.get('isStudent');
 	}
 });
 
@@ -42,5 +46,9 @@ Template.settings.events({
 		}
 		if(newCourse != Session.get('currCourse'))Meteor.call('updateCourse',newCourse);
 		Router.go('/');
-	}
+	},
+
+	//'click': function(){
+		//Meteor.call('addCourse', "nameofcourse")
+	//}
 });

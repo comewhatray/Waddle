@@ -73,35 +73,51 @@
     <div class="col-sm-1"></div>
 
     <div class="col-sm-6">
-
-
-        <div class="btn-group" data-toggle="buttons" value="true">
-
-            <label class="btn btn-primary active">
-                <input type="radio" name="studentToggle" checked="checked" value="true" id='isStudent'> Student
-            </label>
-            <label class="btn btn-primary" type="radio">
-                <input type="radio" name="lectureToggle" value="false" id="isLect"> 
-                Lecturer
-            </label>
-        </div>
-
-    {{#if isLect}}
-        
-        <div class="form-group">
-          <label for="sel1">Select Course:</label>
-          <select class="form-control" id="sel1">
-            {{#each courses}}
-            <option cID={{courseID}} class="courseCode">{{name}}</option>
-            {{/each}}
-          </select>
-        </div>
-
-    {{/if}}
     
-    <button type="submit" class="btn btn-default" id="returnToLogin"> <span class="glyphicon glyphicon-arrow-left"></span> </button>
-    <button type="submit" id="createAccount" class="btn btn-default">Create account</button>
-    <div id="invalid"></div>
+        <div class="row">
+            <div class="btn-group" data-toggle="buttons" value="true">
+
+                <label class="btn btn-primary active" id='isStudent'>
+                    <input type="radio" name="studentToggle" checked="checked" value="true"> Student
+                </label>
+                <label class="btn btn-primary" type="radio" id="isLect">
+                    <input type="radio" name="lectureToggle" value="false"> 
+                    Lecturer
+                </label>
+            </div>
+
+            {{#if isLect}}
+            
+            <div class="form-group">
+              <label for="sel1">Select Course:</label>
+              <select class="form-control" id="sel1">
+                {{#each courses}}
+                <option cID={{courseID}} class="courseCode">{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+
+            {{else}}
+            
+            <div class="form-group">
+
+                <label for="lectDetails">First Name:</label>
+                <input class="form-control"  id="lectFName">
+
+                <label for="lectDetails">Last Name:</label>
+                <input class="form-control"  id="lectLName">
+    
+            </div>
+
+            {{/if}}
+        </div>
+
+        <div class="row">
+    
+            <button type="submit" class="btn btn-default" id="returnToLogin"> <span class="glyphicon glyphicon-arrow-left"></span> </button>
+            <button type="submit" id="createAccount" class="btn btn-default">Create account</button>
+            <div id="invalid"></div>
+        </div>
     </div>
 </template>
 

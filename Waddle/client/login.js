@@ -20,7 +20,28 @@ Template.login.onCreated(
 	Session.set('emailsEqual', false);
 	Session.set('emailValid', false);
 	Session.set('isLect', true);
+	Session.set('fname', "");
+	Session.set('lname', "");
 });
+
+/*
+Template.newAcc.onCreated( function(){
+	// must bind to `document.body` as element will be replaced during re-renders
+  // add the namespace `.tplquestions` so all event handlers can be removed easily
+  $(document.body).on('change.tplquestions', '#isStudent', function(e){
+     // handler
+  });
+  // add the namespace `.tplquestions` so all event handlers can be removed easily
+  $(document.body).on('change.tplquestions', '#isLect', function(e){
+     // handler
+  });
+ });
+
+ Template.newAcc.destroyed( function(){
+   // remove all event handlers in the namespace `.tplquestions`
+   $(document.body).off('.tplquestions');
+ }); 
+*/
 
 Template.login.helpers({
 	logInScreen(){
@@ -76,21 +97,38 @@ Template.newAcc.events({
 
 		e.preventDefault();
 
-  		if( ( Session.get('passwordsEqual') && Session.get('emailsEqual') )){ //&& Session.get('emailValid')
-			var sel = t.find("#sel1");
-			sel = parseInt(sel[sel.selectedIndex].getAttribute("cid"));
-			console.log(sel);
-  			Meteor.call('newStudent', Session.get('email1'), Session.get('password'), sel, function(error, result){
-				if(!!error) alert(error.reason);
-				if(!!result) {
-					console.log(result);
-					Accounts.createUser(result, function(e2){ if(!!e2){ alert(e2.reason); }else{ Router.go('/');} });
-				}
-			});
-		} 
-		else{
-			t.find('#invalid').innerHTML = "Please confirm that the emails and passwords match.";
-		}  		
+
+	  		if( ( Session.get('passwordsEqual') && Session.get('emailsEqual') )){ //&& Session.get('emailValid')
+				
+	  			if(Session.get('isLect')){
+	  		
+					var sel = t.find("#sel1");
+					sel = parseInt(sel[sel.selectedIndex].getAttribute("cid"));
+					console.log(sel);
+		  			Meteor.call('newStudent', Session.get('email1'), Session.get('password'), sel, function(error, result){
+						if(!!error) alert(error.reason);
+						if(!!result) {
+							console.log(result);
+							Accounts.createUser(result, function(e2){ if(!!e2){ alert(e2.reason); }else{ Router.go('/');} });
+						}
+					});
+	  			}
+	  			else{
+	  				Meteor.call('newLecturer', Session.get('email1'), Session.get('password'), Session.get('fname'), Session.get('lname'), function(error, result){
+						if(!!error) alert(error.reason);
+						if(!!result) {
+							console.log(result);
+							Accounts.createUser(result, function(e2){ if(!!e2){ alert(e2.reason); }else{ Router.go('/settings');} });
+						}
+					});
+
+	  			}
+			} 
+			else{
+				t.find('#invalid').innerHTML = "Please confirm that the emails and passwords match.";
+			}
+		
+		
 	},
 
 	'input .inEmail': function(e,t){
@@ -137,6 +175,25 @@ Template.newAcc.events({
 
 	},
 
+	'change #isStudent': function(){
+		console.log(1);
+	},
+
+	'click #isStudent': function(e,t){
+		Session.set('isLect', true);
+	},
+
+	'click #isLect': function(e,t){
+		Session.set('isLect', false);
+	},
+
+	'input #lectFName': function(e,t){
+		Session.set('fname', t.find('#lectFName').value);
+	},
+
+	'input #lectLName': function(e,t){
+		Session.set('lname', t.find('#lectLName').value);
+	}
 	
 })
 
