@@ -12,7 +12,7 @@ Meteor.subscribe('modules', {onReady: function(){
 
 Template.searchResults.helpers({
   modules() {
-    return Modules.find();
+    return Modules.find({courses:Session.get('currCourse')});
   },
 });
 
@@ -28,7 +28,7 @@ Template.searchModules.events({
 });
 
 Template.searchResults.events({
-	'click .list-group-item'(event, instance) {
+	'click .course-link'(event, instance) {
 		Session.set('currModule', (parseInt(event.target.getAttribute('mID'))));
 	}
 });

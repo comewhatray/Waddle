@@ -2,6 +2,7 @@
 
 <template name="login">
 
+<<<<<<< HEAD
     <div class="container container-table">
         <form class="login-form">
 
@@ -42,6 +43,28 @@
         <div class="col-sm-3"> <!-- right of screen-->
 
     </div>
+=======
+    <!--  Logic to determine if it is a new account and such-->
+
+    <!-- this uses data from the login.js-->
+	{{#if showNewAcc}}
+    		{{> newAcc}}
+	{{else}}
+		<div class="checkbox">
+			<label><input type="checkbox"> Remember me</label>
+        	</div>
+	{{/if}}
+	<button type="submit" id="submit" class="btn btn-default">
+	{{#if showNewAcc}}
+    		<span class="glyphicon glyphicon-arrow-left"></span>
+	{{else}}
+		Login
+	{{/if}}
+	</button>
+        <button type="create" id="create" class="btn btn-default">Create account</button>
+    </form>
+    <div class="col-sm-4"> <!-- right of screen--></div>
+>>>>>>> master
   </div>
    
 

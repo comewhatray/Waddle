@@ -4,7 +4,10 @@ import { Template } from 'meteor/templating';
 //gives javascript variable things -- 
 import { ReactiveVar } from 'meteor/reactive-var';
 
+var courseChoice;
+
 // sets up variables for when needed
+<<<<<<< HEAD
 Template.login.onCreated(
 	function loginOnCreated() {
 	//this.logInScreen = new ReactiveVar(true);
@@ -34,6 +37,13 @@ Template.newAcc.helpers({
 	isLect(){
 		return Session.get('isLect');
 	}
+=======
+Template.login.onCreated(function loginOnCreated() {
+	this.showNewAcc = new ReactiveVar(false);
+	this.emailsEqual = new ReactiveVar(false);
+	this.passwordsEqual = new ReactiveVar(false);
+	courseChoice = 0;
+>>>>>>> master
 });
 
 //links to html page
@@ -191,7 +201,7 @@ Template.newAcc.helpers({
 });
 
 Template.login.events({
-'click #submit' : function (e,t)
+	'click #submit' : function clickedSubmit(e,t)
 	{
 		e.preventDefault();
 		if(t.showNewAcc.get()){
@@ -201,17 +211,19 @@ Template.login.events({
 			password  = t.find('#pwd').value;
 			Meteor.loginWithPassword(userEmail, password);
 			//call backthing
+			Session.set('currModule', 0);
 			Router.go('/');
 		}
 	},
-'click .courseCode' : function (e,t)
+	'click .courseCode' : function (e,t)
 	{
 		courseChoice = e.target.cID;
 	},
 
 
-'click #create' : function (e,t)
+	'click #create' : function clickedCreate(e,t)
 	{
+<<<<<<< HEAD
 		var isEmailValid = function(address) {
   			//return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i.test(address);
 
@@ -242,12 +254,38 @@ Template.login.events({
 			}else{
 				t.showNewAcc.set(true);
 			}
+=======
+		//prevent default -- e has its own code it will execute by default which we want to stop
+		e.preventDefault();
+		if(t.showNewAcc.get()){
+			var userEmail = t.find('#email').value,
+			password  = t.find('#pwd').value;
+			Accounts.createUser({
+				email:    userEmail,
+				password: password,
+				profile: {
+					// put things here
+					cID: courseChoice,
+				}
+			}, function (error) {
+				if (error) {
+					alert("Cannot create user: "+ error.reason);
+				}else{
+					Router.go('/');
+					Meteor.call( 'sendVerificationLink');
+				}
+			});
+		}else{
+			t.emailsEqual.set(false);
+			t.passwordsEqual.set(false);
+			t.showNewAcc.set(true);
+>>>>>>> master
 		}
 		else{
 		}
 
 	},
-'input #emailConf' : function(e,t)
+	'input #emailConf' : function(e,t)
 	{
 		if((t.find("#emailConf").value == t.find("#email").value) != Session.get('emailsEqual') && t.find("#emailConf").length>0){
 			Session.set('emailsEqual', !(Session.get('emailsEqual')));
@@ -255,7 +293,7 @@ Template.login.events({
 		}
 	},
 
-'input #pwdConf' : function(e,t)
+	'input #pwdConf' : function(e,t)
 	{
 		if((e.target.value == $('#pwd')[0].value) != Session.get('passwordsEqual') && e.target.value.length>0){
 			Session.set('passwordsEqual', !(Session.get('passwordsEqual')));

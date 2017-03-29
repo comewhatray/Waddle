@@ -20,3 +20,7 @@ top: 199px;
 .mobile-modules {
 height: calc(100vh - 220px);
 }
+
+.hide-vote {
+visibility:hidden
+}

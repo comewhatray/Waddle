@@ -1,6 +1,16 @@
 <template name="questionBoard">
 	<div class="row">
 		<div class="col-sm-8 col-xs-12">
+
+			<div class="container">
+  				<!--<div class="page-header"> -->
+				{{#each modName}}
+    			<h1>{{name}} -{{desc}}</h1>  
+    			{{/each}}    
+ 				 <!-- </div> -->
+			</div>
+
+
 			{{#if loggedIn}} {{> questionBox}} {{/if}}
 			{{#each questions}}
 			{{> question}}
