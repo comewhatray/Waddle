@@ -166,7 +166,6 @@ Meteor.methods({
 	},
 	newLecturer(newEmail, pwd, fName, lName) {
 		if(!!Meteor.user()) throw new Meteor.Error("", "You are already logged in!");
-		if(!Courses.findOne({courseID:choice})) throw new Meteor.Error("", "Course not found in database.");
 		newID = decrementCounter('counters', 'lecturerID');
 		newAcc = {
 			email: newEmail,

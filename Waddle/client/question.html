@@ -4,7 +4,7 @@
 			<div class="votePlus" qid={{questionID}}><span class="glyphicon glyphicon-chevron-up {{#unless isStudent}}hide-vote{{/unless}}"></span></div>
 			<div>{{upvotes}}</div>
 			<div class="voteMinus" qid={{questionID}}><span class="glyphicon glyphicon-chevron-down {{#unless isStudent}}hide-vote{{/unless}}"></span></div>
-			<div class="time-ago">3h</div>
+			<div class="time-ago">{{timeSince timestamp}}</div>
 		</div>
 			<div class="old-question col-xs-10 col-sm-11 panel panel-default" qid={{questionID}}>
 			{{text}}

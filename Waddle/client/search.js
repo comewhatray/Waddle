@@ -3,7 +3,9 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './search.html';
 
-Template.searchResults.onCreated(function(){
+var userProfile = null;
+
+Template.selector.onCreated(function(){
 });
 
 Meteor.subscribe('modules', {onReady: function(){
@@ -29,6 +31,38 @@ Template.searchResults.helpers({
   hasCourse() {
     return Session.get('currCourse') != 0;
   }
+});
+
+Template.selector.helpers({
+	modules() {
+		return Modules.find({}, {desc:-1});
+	},
+	isChosen(mID){
+		if(!Meteor.user()) return;
+		if(userProfile === null) userProfile = Meteor.user().profile.modules;
+	
+		if(!userProfile || !userProfile.includes(mID)){
+			return "";
+		}else{
+			return "chosen";
+		}
+	}
+});
+
+
+Template.selector.events({
+	'click .module-selector'(e,t) {
+		$(e.target).toggleClass('chosen');
+	},
+	'click #setModules'(e,t) {
+		var newJ = [];
+		list = t.find("#moduleList");
+		classes = list.getElementsByTagName("li");
+		for(i=0; i<classes.length; i++){
+			if(classes[i].classList.contains("chosen")) newJ.push(parseInt(classes[i].getAttribute("mID")));
+		}
+		Meteor.call('updateJurisdiction', newJ);
+	},
 });
 
 Template.search.events({

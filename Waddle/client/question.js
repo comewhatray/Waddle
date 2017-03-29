@@ -20,12 +20,20 @@ Template.question.helpers({
   },
   isStudent() {
 	return Session.get('isStudent');
+  },
+  timeSince(stamp) {
+	var age = ~~((Date.now() - stamp.getTime())/1000);	//starts as ms
+	if(age >= 86400) { return ~~(age/86400) + "d"
+	}else if (age >= 3600){ return ~~(age/3600) + "h"
+	}else if (age >= 60){ return ~~(age/60) + "m"
+	}else{ return age+"s";
+	}
   }
 });
 
 Template.answer.helpers({
   getName(id) {
-	flname = Meteor.users.findOne({"profile.userId":id}).profile.name[0];
+	flname = Meteor.users.findOne({"profile.userId":id}).profile.name;
 	return (flname.first + " " + flname.last);
   },
 });

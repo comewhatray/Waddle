@@ -27,6 +27,10 @@ body {
     height: 100%;
 }
 
+.chosen {
+    background-color: #afa;
+}
+
 .results-module-wrapper {
     border-width: 1px;
     border-style: solid;
