@@ -32,9 +32,3 @@ Router.route('/settings', function () {
 }, {
 	name: 'settings'
 });
-
-Router.route('/selector', function () {
-  this.render('moduleEditor');
-}, {
-	name: 'selector'
-});

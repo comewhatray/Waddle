@@ -5,10 +5,10 @@
 <template name="navAnon">
     <div class="collapse navbar-collapse" >
       <ul  class="nav navbar-nav">
-  <li><a style=" color: white;" >You are not logged in.</a></li>
+  <li><a style="color:white">You are not logged in.</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-  <li><a href="login" style=" color: white;" ><span class="glyphicon glyphicon-log-in"></span></a></li>
+  <li><a href="login" style="color:white"><span class="glyphicon glyphicon-log-in"></span></a></li>
       </ul>
     </div>
 </template>
@@ -18,11 +18,11 @@
 <template name="navLoggedIn">
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-  <li><a>{{getEmail}}</a></li>
+  <li><a style="color:white">{{getEmail}}</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li class="logout"><a href="/"><span class="glyphicon glyphicon-log-out"></span></a></li>
+        <li><a href="settings" style="color:white"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li class="logout"><a href="/" style="color:white"><span class="glyphicon glyphicon-log-out"></span></a></li>
       </ul>
     </div>
 </template>

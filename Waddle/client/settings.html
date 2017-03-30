@@ -1,10 +1,10 @@
 <template name="settings">
-
-	{{#if isStudent}}
-	<div class="row">
+	<div class="row settings-wrapper">
 
 		<div class="col-xs-2 col-sm-4"></div>
 		<div class="col-xs-8 col-sm-4">
+	{{#if isStudent}}
+
 
 			<div class="form-group">
 				<label for="selC">Select Course:</label>
@@ -15,7 +15,13 @@
 					{{/each}}
 				</select>
 			</div>
+	
 
+	{{else}}
+
+		{{> selector}}
+
+	{{/if}}
 			<div class="panel panel-default change-pw">
 				<label><strong>Change Password</strong></label>
 				<input class="form-control" type="password" placeholder="Enter old password:" id="old-password-input">
@@ -26,11 +32,5 @@
 			<button type="submit" class="btn btn-primary" id="save">Save</button>
 		</div>		
 		<div class="col-xs-2 col-sm-4"></div>
-	</div>		
-
-	{{else}}
-
-		<p>there we go</p>
-
-	{{/if}}
+	</div>	
 </template>

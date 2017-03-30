@@ -9,6 +9,11 @@ body {
     margin-left: 0px;
     margin-right: 0px;
 }
+
+.settings-wrapper {
+    margin-bottom: 50px;
+}
+
 .container-table {
     display: table;
     height: 80%;
@@ -22,7 +27,6 @@ body {
 }
 .search-results {
     font-size: 14px;
-    overflow-y: scroll;
     height: 100%;
 }
 
@@ -40,6 +44,7 @@ body {
 
 .outcome {
     margin-bottom: 0px;
+    overflow:hidden;
 }
 
 .question-box {
@@ -51,5 +56,8 @@ body {
     
 }
 
+.choose-modules {
+    margin-bottom: 50px;
+}
 
 

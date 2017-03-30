@@ -37,14 +37,14 @@
 </template>
 
 <template name="selector">
-<div class="search-results">
+<div class="search-results choose-modules">
   <ul class="list-group outcome" id="moduleList">
     {{#each modules}}
       <li class="list-group-item module-selector {{isChosen moduleID}}" mID={{moduleID}}>{{name}} - {{desc}}</li>
     {{/each}}
   </ul>
+  <button type="submit" class="btn btn-primary" id="setModules">Save</button>
 </div>
-<button type="submit" class="btn btn-primary" id="setModules">Save</button>
 </template>
 
 <template name="moduleEditor">

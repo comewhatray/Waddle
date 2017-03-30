@@ -10,13 +10,17 @@ Meteor.startup(function () {
 
   //process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
   process.env.MAIL_URL = "smtp://axemreg%40gmail.com:axemaxem@smtp.gmail.com:465/"; 
+  process.env.MAIL_URL = "smtp://axemreg%40gmail.com:axemaxem@smtp.gmail.com:465/"; 
+  process.env.ROOT_URL = "http://danu7.it.nuigalway.ie:8642"; 
 });
 
 Accounts.onCreateUser(function (options, user) {
     if (!user.services.facebook) {
+	user.profile = options.profile
         return user;
     }
     user.emails = [{address: user.services.facebook.email}];
+    user.emails[0].verified = true;
     user.profile = {
         userId : incrementCounter('counters', 'studentID'),
         course : 0
